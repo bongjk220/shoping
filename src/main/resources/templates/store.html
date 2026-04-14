@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DaDream Mall</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body class="store-body">
+<header class="store-hero">
+    <nav class="store-nav">
+        <a class="brand" th:href="@{/store}">DaDream Mall</a>
+        <div class="store-nav__links">
+            <a th:href="@{/admin}">관리자</a>
+            <a th:href="@{/login}">로그인</a>
+            <a th:href="@{/signup}">회원가입</a>
+        </div>
+    </nav>
+    <div class="store-hero__content">
+        <div>
+            <p class="eyebrow">Fresh Curated Market</p>
+            <h1>1조 쇼핑몰 예제 프로젝트</h1>
+            <p class="hero-copy">Spring Boot 4.x, Thymeleaf, TiDB Cloud를 기준으로 바로 확장할 수 있는 프론트엔드와 백엔드 기본 구조를 담았습니다.</p>
+            <div class="hero-actions">
+                <a class="primary-button" th:href="@{/admin}">관리자 대시보드</a>
+                <a class="ghost-button ghost-button--light" href="#featured">추천 상품 보기</a>
+            </div>
+        </div>
+        <div class="hero-panel">
+            <p>구현 기술</p>
+            <ul>
+                <li>HTML5 / CSS3 / JavaScript</li>
+                <li>Java 21 / Spring Boot 4.0.5</li>
+                <li>Thymeleaf / Tomcat 10.1</li>
+                <li>TiDB Cloud / MySQL Driver</li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<main class="store-main">
+    <section class="feature-strip" id="featured">
+        <article class="feature-card" th:each="product : ${featuredProducts}">
+            <div class="feature-card__visual" th:text="${product.emoji}">🥑</div>
+            <div class="feature-card__body">
+                <span class="badge" th:text="${product.badge}">SEASON HIT</span>
+                <h3 th:text="${product.name}">프리미엄 아보카도 세트</h3>
+                <p th:text="${product.summary}">숙성 상태가 고른 2입 패키지</p>
+                <strong><span th:text="${#numbers.formatInteger(product.price, 1, 'COMMA')}">12,800</span>원</strong>
+            </div>
+        </article>
+    </section>
+
+    <section class="catalog-section">
+        <div class="section-head section-head--light">
+            <div>
+                <p class="eyebrow">Best Sellers</p>
+                <h2>인기 상품</h2>
+            </div>
+        </div>
+        <div class="catalog-grid">
+            <article class="catalog-card" th:each="product : ${bestProducts}">
+                <div class="catalog-card__image" th:text="${product.emoji}">🍅</div>
+                <span class="badge" th:text="${product.badge}">ORGANIC</span>
+                <h3 th:text="${product.name}">유기농 대추방울 토마토</h3>
+                <p th:text="${product.summary}">샐러드와 도시락에 잘 어울리는 달콤한 토마토</p>
+                <div class="catalog-card__meta">
+                    <strong><span th:text="${#numbers.formatInteger(product.price, 1, 'COMMA')}">7,900</span>원</strong>
+                    <span>재고 <span th:text="${product.stockQuantity}">42</span>개</span>
+                </div>
+            </article>
+        </div>
+    </section>
+</main>
+</body>
+</html>

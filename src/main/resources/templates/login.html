@@ -1,22 +1,34 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로그인</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
 </head>
-<body>
-    <h1>로그인</h1>
-    <form action="/login" method="post">
-        <div>
-            <label for="username">아이디:</label>
-            <input type="text" id="username" name="username" />
+<body class="auth-body">
+<div class="auth-shell">
+    <section class="auth-panel">
+        <p class="eyebrow">Admin Access</p>
+        <h1>관리자 또는 운영 계정 로그인</h1>
+        <p class="auth-copy">기본 시드 계정은 <strong>admin / admin1234</strong> 입니다.</p>
+        <form th:action="@{/login}" method="post" class="auth-form">
+            <label>
+                <span>아이디</span>
+                <input type="text" name="username" placeholder="아이디 입력">
+            </label>
+            <label>
+                <span>비밀번호</span>
+                <input type="password" name="password" placeholder="비밀번호 입력">
+            </label>
+            <p class="form-error" th:if="${errorMessage}" th:text="${errorMessage}"></p>
+            <button class="primary-button" type="submit">로그인</button>
+        </form>
+        <div class="auth-links">
+            <a th:href="@{/signup}">회원가입</a>
+            <a th:href="@{/store}">스토어 홈</a>
         </div>
-        <div>
-            <label for="password">비밀번호:</label>
-            <input type="password" id="password" name="password" />
-        </div>
-        <div>
-            <button type="submit">로그인</button>
-        </div>
-    </form>
+    </section>
+</div>
 </body>
 </html>
